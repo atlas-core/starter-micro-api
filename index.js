@@ -2,27 +2,33 @@ const http = require('http');
 const { chromium } = require('playwright');
 
 http.createServer(async function (req, res) {
-    // Launch a Playwright browser instance
-    const browser = await chromium.launch();
+    try {
+        // Launch a Playwright browser instance
+        const browser = await chromium.launch();
 
-    // Create a new page
-    const page = await browser.newPage();
+        // Create a new page
+        const page = await browser.newPage();
 
-    // Navigate to a webpage
-    await page.goto('https://example.com');
+        // Navigate to Google's homepage
+        await page.goto('https://www.google.com');
 
-    // Take a screenshot of the page
-    const screenshot = await page.screenshot();
+        // Take a screenshot of the page
+        const screenshot = await page.screenshot();
 
-    // Close the Playwright browser
-    await browser.close();
+        // Close the Playwright browser
+        await browser.close();
 
-    // Set the response headers
-    res.writeHead(200, {
-        'Content-Type': 'image/png',
-        'Content-Length': screenshot.length
-    });
+        // Set the response headers
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': screenshot.length
+        });
 
-    // Send the screenshot as the response
-    res.end(screenshot);
+        // Send the screenshot as the response
+        res.end(screenshot);
+    } catch (error) {
+        console.error('Error:', error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+    }
 }).listen(process.env.PORT || 3000);
