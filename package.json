@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^12.0.0" // Add Puppeteer as a dependency
+     "puppeteer": "^12.0.0"
   }
 }
