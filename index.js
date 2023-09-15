@@ -29,6 +29,8 @@ http.createServer(async function (req, res) {
     } catch (error) {
         console.error('Error:', error);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('Internal Server Error');
+        res.end('Internal Server Error: ' + error.message);
     }
-}).listen(process.env.PORT || 3000);
+}).listen(process.env.PORT || 3000, () => {
+    console.log('Server is running on port', process.env.PORT || 3000);
+});
