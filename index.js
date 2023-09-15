@@ -1,9 +1,11 @@
 const http = require('http');
-const puppeteer = require('puppeteer');
+const { chromium } = require('playwright');
 
 http.createServer(async function (req, res) {
-    // Create a Puppeteer browser instance
-    const browser = await puppeteer.launch();
+    // Launch a Playwright browser instance
+    const browser = await chromium.launch();
+
+    // Create a new page
     const page = await browser.newPage();
 
     // Navigate to a webpage
@@ -12,7 +14,7 @@ http.createServer(async function (req, res) {
     // Take a screenshot of the page
     const screenshot = await page.screenshot();
 
-    // Close the Puppeteer browser
+    // Close the Playwright browser
     await browser.close();
 
     // Set the response headers
