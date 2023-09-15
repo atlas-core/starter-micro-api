@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     }
 
     const page = await browser.newPage();
-    await page.goto('https://example.com');
+    await page.goto('https://google.com');
     // Your scraping or automation logic here
 
     return {
